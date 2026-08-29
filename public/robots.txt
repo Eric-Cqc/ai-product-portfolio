@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eric-cqc.github.io/ai-product-portfolio/sitemap.xml

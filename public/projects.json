@@ -1,0 +1,11 @@
+[
+  {"slug":"mathmentor","title":"MathMentor 奥数私教 Agent","tier":"flagship","status":"本地私测候选","publicBoundary":"离线数值题实录；非正式微信上线或真实学习效果。"},
+  {"slug":"healthai-radar","title":"HealthAI Radar","tier":"flagship","status":"离线 Demo","publicBoundary":"Research Shadow 0/3；生产、调度和正式写入关闭。"},
+  {"slug":"ai-video-preproduction","title":"AI Video Preproduction Agent","tier":"flagship","status":"Local RC","publicBoundary":"deterministic path；paid Provider 与生产未验收。"},
+  {"slug":"ai-saas-pricing","title":"AI SaaS Pricing Observatory","tier":"selected","status":"只读 Observatory","publicBoundary":"40 个产品 × 5 个独立快照；不推断厂商采用轨迹。"},
+  {"slug":"super-agent","title":"双用户 Super Agent","tier":"selected","status":"本地原型","publicBoundary":"审批、幂等与租户边界原型；非生产外部执行。"},
+  {"slug":"quant-alpha","title":"Quant Alpha Research Framework","tier":"selected","status":"研究框架","publicBoundary":"全部为 synthetic demo；不构成投资建议或实盘业绩。"},
+  {"slug":"credit-default","title":"Credit Default Cost-Sensitive Model Selection","tier":"selected","status":"课程项目","publicBoundary":"示意误判成本；不是实际授信或生产风控。"},
+  {"slug":"courier-action","title":"Courier Action Classification","tier":"selected","status":"课程项目","publicBoundary":"只公开聚合指标；不发布原始业务数据。"},
+  {"slug":"campus-food-sim","title":"Campus Food Pickup Simulation","tier":"selected","status":"仿真研究","publicBoundary":"50 次假设驱动仿真；不是校园实测。"}
+]
