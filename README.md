@@ -17,7 +17,7 @@ npm run dev
 npm run build:pages
 ```
 
-静态文件生成到 `dist-pages/`。`404.html` 与入口共用同一构建，使 `/projects/{slug}` 和 `/resume` 在 GitHub Pages 直接访问时仍能正确渲染。推送到 `main` 后，`.github/workflows/pages.yml` 自动部署。
+静态文件生成到 `dist-pages/`。构建后会为 `/projects/{slug}` 与 `/resume` 生成实体入口，并保留 `404.html` 回退，使 GitHub Pages 深链直接返回可访问页面。推送到 `main` 后，`.github/workflows/pages.yml` 自动部署。
 
 ## 内容结构
 
