@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/</loc></url>
-  <url><loc>https://eric-cqc.github.io/ai-product-portfolio/resume</loc></url>
-  <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/mathmentor</loc></url>
-  <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/healthai-radar</loc></url>
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/ai-video-preproduction</loc></url>
+  <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/healthai-radar</loc></url>
+  <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/mathmentor</loc></url>
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/ai-saas-pricing</loc></url>
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/super-agent</loc></url>
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/quant-alpha</loc></url>
+  <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/hermes-agent-study</loc></url>
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/credit-default</loc></url>
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/courier-action</loc></url>
   <url><loc>https://eric-cqc.github.io/ai-product-portfolio/projects/campus-food-sim</loc></url>

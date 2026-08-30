@@ -4,13 +4,13 @@ import { resolve } from 'node:path';
 const out = resolve('dist-pages');
 const entry = resolve(out, 'index.html');
 const routes = [
-  'resume',
-  'projects/mathmentor',
-  'projects/healthai-radar',
   'projects/ai-video-preproduction',
+  'projects/healthai-radar',
+  'projects/mathmentor',
   'projects/ai-saas-pricing',
   'projects/super-agent',
   'projects/quant-alpha',
+  'projects/hermes-agent-study',
   'projects/credit-default',
   'projects/courier-action',
   'projects/campus-food-sim',
