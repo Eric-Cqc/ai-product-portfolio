@@ -1,11 +1,17 @@
 import type { ReactNode } from 'react';
 
 export {
-  PortfolioFooter as SiteFooter,
-  PortfolioHeader as SiteHeader,
-} from '@/components/portfolio-v2';
+  PortfolioFooterV3 as SiteFooter,
+  PortfolioHeaderV3 as SiteHeader,
+} from '@/components/portfolio-v3';
 
-export function SectionLabel({ children, index }: { children: ReactNode; index?: string }) {
+export function SectionLabel({
+  children,
+  index,
+}: {
+  children: ReactNode;
+  index?: string;
+}) {
   return (
     <div className="flex items-center gap-3">
       {index ? <span className="section-index">{index}</span> : null}

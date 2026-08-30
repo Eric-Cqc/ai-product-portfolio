@@ -1,15 +1,19 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PortfolioProjectPage } from '@/components/portfolio-v2';
-import { getProjectV2, projectsV2 } from '@/lib/v2-portfolio';
+import { PortfolioProjectPageV3 } from '@/components/portfolio-v3';
+import { getProjectV3, projectsV3 } from '@/lib/v3-portfolio';
 
 export function generateStaticParams() {
-  return projectsV2.map((project) => ({ slug: project.slug }));
+  return projectsV3.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectV2(slug);
+  const project = getProjectV3(slug);
 
   if (!project) {
     return { title: '项目未找到' };
@@ -17,27 +21,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: project.title,
-    description: `${project.statement} ${project.problem}`,
+    description: `${project.summary.from} ${project.summary.to}`,
     openGraph: {
-      title: `${project.title}｜AI 产品作品集`,
-      description: project.statement,
+      title: `${project.title}｜人工智能产品案例`,
+      description: project.summary.promise,
       images: [],
     },
     twitter: {
-      title: `${project.title}｜AI 产品作品集`,
-      description: project.statement,
+      title: `${project.title}｜人工智能产品案例`,
+      description: project.summary.promise,
       images: [],
     },
   };
 }
 
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const project = getProjectV2(slug);
+  const project = getProjectV3(slug);
 
   if (!project) {
     notFound();
   }
 
-  return <PortfolioProjectPage project={project} />;
+  return <PortfolioProjectPageV3 project={project} />;
 }
