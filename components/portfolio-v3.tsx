@@ -20,18 +20,42 @@ import {
 
 const caseSections = [
   ['00', '摘要', 'summary'],
-  ['01', '旧流程与承诺', 'problem'],
-  ['02', '完整用户旅程', 'journey'],
-  ['03', '三个关键机制', 'mechanisms'],
+  ['01', '旧流程与机会', 'problem'],
+  ['02', '用户旅程', 'journey'],
+  ['03', '关键机制', 'mechanisms'],
   ['04', '系统分工', 'division'],
-  ['05', '架构与取舍', 'decisions'],
-  ['06', '四类评测', 'evaluation'],
+  ['05', '产品取舍', 'decisions'],
+  ['06', '如何验证', 'evaluation'],
   ['07', '失败与迭代', 'badcase'],
   ['08', '结果与边界', 'boundary'],
 ] as const;
 
 function twoDigits(index: number) {
   return String(index + 1).padStart(2, '0');
+}
+
+function siteHref(path: string) {
+  if (/^(?:https?:|mailto:|tel:)/i.test(path)) return path;
+
+  const cleanPath = path.replace(/^\.?\//, '');
+  if (typeof document !== 'undefined') {
+    const base = document.querySelector('base')?.href;
+    if (base) return new URL(cleanPath, base).toString();
+  }
+
+  return `/${cleanPath}`;
+}
+
+function ProjectTitle({ title }: { title: string }) {
+  if (title === 'MathMentor 奥数私教') {
+    return (
+      <>
+        MathMentor <span className="v3-title-no-break">奥数私教</span>
+      </>
+    );
+  }
+
+  return title;
 }
 
 export function PortfolioHeaderV3() {
@@ -44,23 +68,26 @@ export function PortfolioHeaderV3() {
         <div className="v3-shell v3-header-inner">
           <a
             className="v3-brand v3-focus"
-            href="./"
+            href={siteHref('./')}
             aria-label="蔡骐充人工智能产品案例集首页"
           >
             <strong>蔡骐充</strong>
             <span>人工智能产品案例集</span>
           </a>
           <span className="v3-header-index" aria-hidden="true">
-            三个产品案例
+            三个深度案例
           </span>
           <nav className="v3-nav" aria-label="案例集导航">
-            <a className="v3-focus" href="./#cases">
+            <a className="v3-focus" href={siteHref('./#cases')}>
               三个案例
             </a>
-            <a className="v3-focus" href="assets/demo.mp4">
+            <a className="v3-focus" href={siteHref('assets/demo.mp4')}>
               交互演示
             </a>
-            <a className="v3-focus" href="蔡骐充_人工智能产品案例集_2026.pdf">
+            <a
+              className="v3-focus"
+              href={siteHref('蔡骐充_人工智能产品案例集_2026.pdf')}
+            >
               下载作品集
             </a>
             <a
@@ -87,11 +114,14 @@ export function PortfolioFooterV3() {
           <h2>创作协同、战略情报与智能教育。</h2>
         </div>
         <div className="v3-footer-links">
-          <a className="v3-focus" href="蔡骐充_人工智能产品案例集_2026.pdf">
+          <a
+            className="v3-focus"
+            href={siteHref('蔡骐充_人工智能产品案例集_2026.pdf')}
+          >
             <span>下载完整作品集</span>
             <Download aria-hidden="true" />
           </a>
-          <a className="v3-focus" href="assets/demo.mp4">
+          <a className="v3-focus" href={siteHref('assets/demo.mp4')}>
             <span>查看交互演示</span>
             <PlayCircle aria-hidden="true" />
           </a>
@@ -120,6 +150,7 @@ function ProjectShot({
   className?: string;
 }) {
   const [failed, setFailed] = useState(false);
+  const imageHref = image ? siteHref(image.src) : '';
 
   if (!image || failed) {
     return (
@@ -143,13 +174,13 @@ function ProjectShot({
     <figure className={`v3-shot ${className}`}>
       <a
         className="v3-shot-link v3-focus"
-        href={image.src}
+        href={imageHref}
         target="_blank"
         rel="noreferrer"
         aria-label={`打开原图：${image.alt}`}
       >
         <img
-          src={image.src}
+          src={imageHref}
           alt={image.alt}
           width={image.width}
           height={image.height}
@@ -175,13 +206,15 @@ function ProjectShot({
 function HomeCaseRow({ project }: { project: FlagshipProjectV3 }) {
   return (
     <a
-      className="v3-case-row v3-focus"
-      href={`projects/${project.slug}`}
+      className={`v3-case-row v3-accent-${project.slug} v3-focus`}
+      href={siteHref(`projects/${project.slug}`)}
       aria-label={`阅读${project.title}完整案例`}
     >
       <span className="v3-case-number">{project.index}</span>
       <span className="v3-case-domain">{project.category}</span>
-      <h2>{project.title}</h2>
+      <h2>
+        <ProjectTitle title={project.title} />
+      </h2>
       <p className="v3-case-shift">
         从{project.summary.from}，到{project.summary.to}。
       </p>
@@ -196,12 +229,17 @@ function HomeCaseRow({ project }: { project: FlagshipProjectV3 }) {
 
 function HomeCaseFeature({ project }: { project: FlagshipProjectV3 }) {
   return (
-    <section className="v3-home-case" id={`case-${project.index}`}>
+    <section
+      className={`v3-home-case v3-accent-${project.slug}`}
+      id={`case-${project.index}`}
+    >
       <div className="v3-shell">
         <header className="v3-home-case-head">
           <span>{project.index}</span>
           <div className="v3-home-case-title">
-            <h2>{project.title}</h2>
+            <h2>
+              <ProjectTitle title={project.title} />
+            </h2>
             <p>{project.summary.promise}</p>
           </div>
           <div className="v3-home-case-aside">
@@ -219,6 +257,15 @@ function HomeCaseFeature({ project }: { project: FlagshipProjectV3 }) {
             </p>
           </div>
         </header>
+        <div className="v3-home-proof" aria-label={`${project.title}核心证据`}>
+          {project.facts.map((fact) => (
+            <article key={fact.label}>
+              <strong>{fact.value}</strong>
+              <span>{fact.label}</span>
+              <p>{fact.meaning}</p>
+            </article>
+          ))}
+        </div>
         <div className="v3-home-case-body">
           <ProjectShot
             image={project.images[0]}
@@ -236,7 +283,7 @@ function HomeCaseFeature({ project }: { project: FlagshipProjectV3 }) {
             ))}
             <a
               className="v3-case-link v3-focus"
-              href={`projects/${project.slug}`}
+              href={siteHref(`projects/${project.slug}`)}
             >
               阅读完整案例 <ArrowRight aria-hidden="true" />
             </a>
@@ -257,11 +304,27 @@ export function PortfolioHomeV3() {
           <div className="v3-cover-heading">
             <div>
               <p className="v3-kicker">创作协同 · 战略情报 · 智能教育</p>
-              <h1>三个从具体任务出发的人工智能产品案例。</h1>
+              <h1>
+                把模糊任务，
+                <br />
+                做成可运行、
+                <br />
+                <span>可验证的产品。</span>
+              </h1>
             </div>
-            <p className="v3-cover-deck">
-              案例呈现旧流程、用户旅程、关键机制、产品取舍和本地验证结果。
-            </p>
+            <div className="v3-cover-deck">
+              <p>
+                三个真实案例，分别回答创作协同、战略情报与智能教育中：人工智能应该做什么、由谁决定、怎样验证。
+              </p>
+              <div className="v3-cover-actions">
+                <a className="v3-focus" href="#cases">
+                  查看三个案例 <ArrowRight aria-hidden="true" />
+                </a>
+                <a className="v3-focus" href={siteHref('assets/demo.mp4')}>
+                  播放交互演示 <PlayCircle aria-hidden="true" />
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="v3-case-ledger" id="cases" aria-label="三个完整案例">
@@ -302,7 +365,7 @@ function ProjectToc({ project }: { project: FlagshipProjectV3 }) {
       </ol>
       <div className="v3-toc-actions">
         {project.demo ? (
-          <a className="v3-focus" href={project.demo}>
+          <a className="v3-focus" href={siteHref(project.demo)}>
             交互演示 <PlayCircle aria-hidden="true" />
           </a>
         ) : null}
@@ -343,7 +406,7 @@ function CaseMasthead({ project }: { project: FlagshipProjectV3 }) {
   return (
     <section className="v3-project-masthead" id="summary">
       <div className="v3-shell">
-        <a className="v3-back v3-focus" href="./#cases">
+        <a className="v3-back v3-focus" href={siteHref('./#cases')}>
           <ArrowLeft aria-hidden="true" /> 返回三个案例
         </a>
         <div className="v3-masthead-grid">
@@ -351,7 +414,9 @@ function CaseMasthead({ project }: { project: FlagshipProjectV3 }) {
             <p className="v3-kicker">
               {project.index} · {project.category} · {project.year}
             </p>
-            <h1>{project.title}</h1>
+            <h1>
+              <ProjectTitle title={project.title} />
+            </h1>
             <p>{project.summary.promise}</p>
             <div className="v3-shift-line">
               <div>
@@ -382,7 +447,7 @@ function CaseMasthead({ project }: { project: FlagshipProjectV3 }) {
                 </dd>
               </div>
               <div>
-                <dt>证据范围</dt>
+                <dt>验证范围</dt>
                 <dd>{project.status.evidenceLevel}</dd>
               </div>
             </dl>
@@ -392,9 +457,7 @@ function CaseMasthead({ project }: { project: FlagshipProjectV3 }) {
         <dl className="v3-project-facts">
           {project.facts.map((fact) => (
             <div className="v3-fact" key={fact.label}>
-              <dt>
-                {fact.label} · {fact.evidenceLevel}
-              </dt>
+              <dt>{fact.label}</dt>
               <dd>
                 <strong>{fact.value}</strong>
                 <span>{fact.meaning}</span>
@@ -417,8 +480,8 @@ function ProblemSection({ project }: { project: FlagshipProjectV3 }) {
     <section className="v3-section" id="problem">
       <SectionHeading
         index="01"
-        title="旧流程与产品承诺"
-        description="旧流程的关键断点，以及产品保留给人工的决定。"
+        title="旧流程为什么失效"
+        description="先定位旧流程的关键断点，再定义产品应改变什么、哪些决定必须留给人。"
       />
       <p className="v3-prose-lead">{project.oldWorkflow.description}</p>
       <ul className="v3-breakpoints" aria-label="旧流程的主要断点">
@@ -499,25 +562,20 @@ function MechanismsSection({ project }: { project: FlagshipProjectV3 }) {
                 </div>
                 <dl>
                   <div>
-                    <dt>要回答的问题</dt>
-                    <dd>{mechanism.question}</dd>
-                  </div>
-                  <div>
-                    <dt>现实约束</dt>
-                    <dd>{mechanism.constraint}</dd>
+                    <dt>问题与约束</dt>
+                    <dd>
+                      {mechanism.question} {mechanism.constraint}
+                    </dd>
                   </div>
                   <div>
                     <dt>产品选择</dt>
                     <dd>{mechanism.choice}</dd>
                   </div>
                   <div>
-                    <dt>放弃的方案</dt>
-                    <dd>{mechanism.rejectedAlternative}</dd>
-                  </div>
-                  <div>
-                    <dt>代价与验证</dt>
+                    <dt>放弃、代价与验证</dt>
                     <dd>
-                      {mechanism.cost} {mechanism.validation}
+                      {mechanism.rejectedAlternative} {mechanism.cost}{' '}
+                      {mechanism.validation}
                     </dd>
                   </div>
                 </dl>
@@ -563,8 +621,8 @@ function DecisionsSection({ project }: { project: FlagshipProjectV3 }) {
     <section className="v3-section" id="decisions">
       <SectionHeading
         index="05"
-        title="架构与关键取舍"
-        description="以下取舍针对当前用户风险和本地验证范围。"
+        title="产品取舍"
+        description="在当前用户风险和验证范围内，说明选择了什么、放弃了什么，以及代价。"
       />
       <div className="v3-decisions">
         {project.decisions.map((decision, index) => (
@@ -599,8 +657,8 @@ function EvaluationSection({ project }: { project: FlagshipProjectV3 }) {
     <section className="v3-section" id="evaluation">
       <SectionHeading
         index="06"
-        title="四类评测"
-        description="分别检查最终任务、执行过程、安全边界和界面可用性。"
+        title="如何验证"
+        description="先看用户任务能否完成，再检查过程、边界和界面是否可靠。"
       />
       <div className="v3-evaluations">
         {project.evaluations.map((evaluation, index) => (
@@ -612,6 +670,10 @@ function EvaluationSection({ project }: { project: FlagshipProjectV3 }) {
               <span>{project.index}</span>
             </div>
             <h3>{evaluation.risk}</h3>
+            <p className="v3-evaluation-result">
+              <span>当前结论</span>
+              {evaluation.result}
+            </p>
             <dl>
               <div>
                 <dt>怎么测</dt>
@@ -622,11 +684,7 @@ function EvaluationSection({ project }: { project: FlagshipProjectV3 }) {
                 <dd>{evaluation.grader}</dd>
               </div>
               <div>
-                <dt>当前结果</dt>
-                <dd>{evaluation.result}</dd>
-              </div>
-              <div>
-                <dt>结论边界</dt>
+                <dt>适用范围</dt>
                 <dd>{evaluation.scope}</dd>
               </div>
             </dl>
@@ -676,7 +734,7 @@ function BoundarySection({ project }: { project: FlagshipProjectV3 }) {
       <SectionHeading
         index="08"
         title="结果、我的工作与边界"
-        description="列明当前交付、个人贡献、已验证结果和待验证事项。"
+        description="说清做成了什么、我负责什么，以及现阶段不能证明什么。"
       />
       <p className="v3-prose-lead">{project.result.headline}</p>
       <div className="v3-role-note">
@@ -727,7 +785,10 @@ export function PortfolioProjectPageV3({
   const nextProject = projectsV3[(currentIndex + 1) % projectsV3.length];
 
   return (
-    <main className="v3-page" id="main-content">
+    <main
+      className={`v3-page v3-project-page v3-accent-${project.slug}`}
+      id="main-content"
+    >
       <PortfolioHeaderV3 />
       <CaseMasthead project={project} />
       <div className="v3-shell v3-case-layout">
@@ -745,9 +806,14 @@ export function PortfolioProjectPageV3({
       </div>
       <section className="v3-next">
         <div className="v3-shell">
-          <a className="v3-focus" href={`projects/${nextProject.slug}`}>
+          <a
+            className="v3-focus"
+            href={siteHref(`projects/${nextProject.slug}`)}
+          >
             <span>下一个完整案例</span>
-            <strong>{nextProject.title}</strong>
+            <strong>
+              <ProjectTitle title={nextProject.title} />
+            </strong>
             <ArrowRight aria-hidden="true" />
           </a>
         </div>
@@ -765,7 +831,7 @@ export function PortfolioNotFoundV3() {
         <div>
           <span>404 · 页面不存在</span>
           <h1>这不在三个案例里。</h1>
-          <a className="v3-case-link v3-focus" href="./">
+          <a className="v3-case-link v3-focus" href={siteHref('./')}>
             返回案例集 <ArrowRight aria-hidden="true" />
           </a>
         </div>

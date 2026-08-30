@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: '%s｜蔡骐充人工智能产品案例集',
   },
   description:
-    '三个从具体任务出发的人工智能产品案例，覆盖创作前期协作、医疗竞争情报和奥数训练。',
+    '三个深度案例，展示如何把创作协同、战略情报与智能教育中的模糊任务做成可运行、可验证的产品。',
   authors: [{ name: '蔡骐充', url: 'https://github.com/Eric-Cqc' }],
   keywords: ['人工智能产品', '智能体产品', '产品案例', '人工审核', '模型评测'],
   openGraph: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: '蔡骐充人工智能产品案例集',
     title: '蔡骐充｜人工智能产品案例集',
     description:
-      '三个从具体任务出发的人工智能产品案例，覆盖创作前期协作、医疗竞争情报和奥数训练。',
+      '三个深度案例，展示如何把创作协同、战略情报与智能教育中的模糊任务做成可运行、可验证的产品。',
     images: [
       {
         url: 'https://eric-cqc.github.io/ai-product-portfolio/og.png',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '蔡骐充｜人工智能产品案例集',
     description:
-      '三个从具体任务出发的人工智能产品案例，覆盖创作前期协作、医疗竞争情报和奥数训练。',
+      '三个深度案例，展示如何把创作协同、战略情报与智能教育中的模糊任务做成可运行、可验证的产品。',
     images: ['https://eric-cqc.github.io/ai-product-portfolio/og.png'],
   },
 };
