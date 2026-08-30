@@ -40,7 +40,10 @@ function siteHref(path: string) {
   const cleanPath = path.replace(/^\.?\//, '');
   if (typeof document !== 'undefined') {
     const base = document.querySelector('base')?.href;
-    if (base) return new URL(cleanPath, base).toString();
+    if (base) {
+      const href = new URL(cleanPath, base);
+      return `${decodeURI(href.pathname)}${href.search}${href.hash}`;
+    }
   }
 
   return `/${cleanPath}`;
