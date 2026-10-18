@@ -85,7 +85,7 @@ export function PortfolioHeaderV3() {
               三个案例
             </a>
             <a className="v3-focus" href={siteHref('assets/demo.mp4')}>
-              交互演示
+              演示视频
             </a>
             <a
               className="v3-focus"
@@ -99,7 +99,7 @@ export function PortfolioHeaderV3() {
               target="_blank"
               rel="noreferrer"
             >
-              项目代码
+              GitHub 主页
             </a>
           </nav>
         </div>
@@ -125,7 +125,7 @@ export function PortfolioFooterV3() {
             <Download aria-hidden="true" />
           </a>
           <a className="v3-focus" href={siteHref('assets/demo.mp4')}>
-            <span>查看交互演示</span>
+            <span>查看演示视频</span>
             <PlayCircle aria-hidden="true" />
           </a>
           <a
@@ -324,7 +324,7 @@ export function PortfolioHomeV3() {
                   查看三个案例 <ArrowRight aria-hidden="true" />
                 </a>
                 <a className="v3-focus" href={siteHref('assets/demo.mp4')}>
-                  播放交互演示 <PlayCircle aria-hidden="true" />
+                  播放演示视频 <PlayCircle aria-hidden="true" />
                 </a>
               </div>
             </div>
@@ -369,7 +369,7 @@ function ProjectToc({ project }: { project: FlagshipProjectV3 }) {
       <div className="v3-toc-actions">
         {project.demo ? (
           <a className="v3-focus" href={siteHref(project.demo)}>
-            交互演示 <PlayCircle aria-hidden="true" />
+            演示视频 <PlayCircle aria-hidden="true" />
           </a>
         ) : null}
         {project.github ? (
